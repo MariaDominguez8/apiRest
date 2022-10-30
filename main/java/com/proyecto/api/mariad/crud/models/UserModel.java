@@ -1,16 +1,12 @@
 package com.proyecto.api.mariad.crud.models;
 
-import java.util.UUID;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 //import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Type;
 
 @Entity
 @Table(name = "users")
@@ -18,10 +14,8 @@ public class UserModel {
 
 	/*----- ATRIBUTOS -----*/
 	@Id
-	@Type(type = "uuid-binary") // Si no especifico el tipo de dato que es el objeto, da un error en mysql
-	@GeneratedValue
-	@GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator") // Generamos un id de tipo UUID
-	private UUID id; // Mejor opcion encontrada segun el caso, para el error duplicate pk 'value'
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id; // Mejor opcion encontrada segun el caso, para el error duplicate pk 'value'
 
 	@Column(name = "firstname", nullable = false, length = 36) // hacemos referencia a las columnas de la tabla
 	private String firstName;
@@ -39,11 +33,11 @@ public class UserModel {
 	private String gender;
 
 	/*----- GETTERS AND SETTERS -----*/
-	public UUID getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(UUID id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

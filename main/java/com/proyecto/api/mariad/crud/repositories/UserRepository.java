@@ -1,7 +1,6 @@
 package com.proyecto.api.mariad.crud.repositories;
 
 import java.util.ArrayList;
-import java.util.UUID;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -10,7 +9,8 @@ import org.springframework.stereotype.Repository;
 import com.proyecto.api.mariad.crud.models.UserModel;
 
 @Repository
-public interface UserRepository extends CrudRepository<UserModel, UUID> {
+public interface UserRepository extends CrudRepository<UserModel, Long> {
+
 	@Query(value = "{call getIsMinor()}", nativeQuery = true)
 	public abstract ArrayList<UserModel> filterProcedureIsMinor(Integer age);
 

@@ -2,7 +2,6 @@ package com.proyecto.api.mariad.crud.services;
 
 import java.util.ArrayList;
 import java.util.Optional;
-import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,7 +23,7 @@ public class UserService {
 		return userRepository.save(user);
 	}
 
-	public Optional<UserModel> getById(UUID id) {
+	public Optional<UserModel> getById(Long id) {
 		return userRepository.findById(id);
 	}
 
@@ -40,7 +39,7 @@ public class UserService {
 		return userRepository.filterProcedureGenderM(gender);
 	}
 
-	public boolean deleteUser(UUID id) {
+	public boolean deleteUser(Long id) {
 		try {
 			userRepository.deleteById(id);
 			return true;

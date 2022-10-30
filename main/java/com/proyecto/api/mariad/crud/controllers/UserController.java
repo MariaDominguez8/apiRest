@@ -2,7 +2,6 @@ package com.proyecto.api.mariad.crud.controllers;
 
 import java.util.ArrayList;
 import java.util.Optional;
-import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -34,7 +33,7 @@ public class UserController {
 	}
 
 	@GetMapping(path = "/{id}")
-	public Optional<UserModel> getById(@PathVariable("id") UUID id) {
+	public Optional<UserModel> getById(@PathVariable("id") Long id) {
 		return this.userService.getById(id);
 	}
 
@@ -54,7 +53,7 @@ public class UserController {
 	}
 
 	@DeleteMapping(path = "/{id}")
-	public String deleteById(@PathVariable("id") UUID id) {
+	public String deleteById(@PathVariable("id") Long id) {
 		boolean ok = this.userService.deleteUser(id);
 		if (ok) {
 			return "Se ha eliminado el usuario nro " + id + " con éxito";
