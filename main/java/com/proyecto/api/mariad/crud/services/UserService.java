@@ -9,6 +9,15 @@ import org.springframework.stereotype.Service;
 import com.proyecto.api.mariad.crud.models.UserModel;
 import com.proyecto.api.mariad.crud.repositories.UserRepository;
 
+/**
+ * En Esta clase se desarrollan los metodos que necesitemos utilizar. Conecta
+ * con UserRepository que es en donde realmente se realizan las conexiones a la
+ * base de datos.
+ * 
+ * @author: Maria Dominguez
+ * @version: 31/10/2022
+ */
+
 @Service
 public class UserService {
 
@@ -37,6 +46,11 @@ public class UserService {
 
 	public ArrayList<UserModel> getByGenderMale(String gender) {
 		return userRepository.filterProcedureGenderM(gender);
+	}
+
+	public UserModel updateUser(UserModel user) {
+		return userRepository.filterProcedureUpdateUser(user.getFirstName(), user.getLastName(), user.getEmail(),
+				user.getAge());
 	}
 
 	public boolean deleteUser(Long id) {
