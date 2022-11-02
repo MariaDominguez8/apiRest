@@ -1,9 +1,13 @@
 package com.proyecto.api.mariad.crud.controllers;
 
 import java.util.ArrayList;
+
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,7 +16,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.proyecto.api.mariad.crud.models.UserModel;
 import com.proyecto.api.mariad.crud.services.UserService;
 
@@ -38,8 +41,9 @@ public class UserController {
 
 	@RequestMapping(value = "/create")
 	@PostMapping()
-	public UserModel saveUser(@RequestBody UserModel user) {
-		return this.userService.saveUser(user);
+	public String saveUser(@Valid @RequestBody UserModel user) {
+			userService.saveUser(user);
+			return "El usuario " + user.getFirstName() + " "+ user.getLastName()+ " ha sido guardado con éxito.";
 	}
 
 	@GetMapping(path = "/{id}")
@@ -64,12 +68,10 @@ public class UserController {
 
 	@RequestMapping(value = "/editUser/{id}")
 	@PutMapping()
-	public UserModel updateUser(@RequestBody UserModel user, @PathVariable Long id) {
-
-		return this.userService.saveUser(user);
-
+	public UserModel updateUser(@Valid @RequestBody UserModel user, @PathVariable Long id) {
+			return this.userService.saveUser(user);
 	}
-
+	
 	@DeleteMapping(path = "/delete/{id}")
 	public String deleteById(@PathVariable("id") Long id) {
 		boolean ok = this.userService.deleteUser(id);
