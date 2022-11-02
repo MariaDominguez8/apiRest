@@ -1,5 +1,4 @@
 package com.proyecto.api.mariad.crud.services;
-
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -10,7 +9,7 @@ import com.proyecto.api.mariad.crud.models.UserModel;
 import com.proyecto.api.mariad.crud.repositories.UserRepository;
 
 /**
- * En Esta clase se desarrollan los metodos que necesitemos utilizar. Conecta
+ * En Esta clase se desarrollan los métodos que necesitemos utilizar. Conecta
  * con UserRepository que es en donde realmente se realizan las conexiones a la
  * base de datos.
  * 
@@ -20,7 +19,6 @@ import com.proyecto.api.mariad.crud.repositories.UserRepository;
 
 @Service
 public class UserService {
-
 	@Autowired
 	UserRepository userRepository;
 
@@ -29,7 +27,11 @@ public class UserService {
 	}
 
 	public UserModel saveUser(UserModel user) {
-		return userRepository.save(user);
+		if(userRepository.existsById(user.getId())) {
+			return userRepository.save(user);	
+		} else {
+			return new UserModel();
+		}
 	}
 
 	public Optional<UserModel> getById(Long id) {
@@ -61,5 +63,4 @@ public class UserService {
 			return false;
 		}
 	}
-
 }
